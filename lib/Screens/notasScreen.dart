@@ -1,4 +1,3 @@
-
 import 'package:app_autonomo/Navegacion/drawer.dart';
 import 'package:app_autonomo/Screens/notasDetalles.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -35,7 +34,10 @@ class NotesListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(userId: userId), // Aquí le pasas el userId
-      appBar: AppBar(title: Text("Notas de Gastos")),
+      appBar: AppBar(
+        title: Text("Notas de Gastos"),
+        backgroundColor: Colors.blueGrey, // Cambié el color de fondo del AppBar
+      ),
       body: FutureBuilder(
         future: fetchNotes(),
         builder: (context, snapshot) {
@@ -47,14 +49,35 @@ class NotesListScreen extends StatelessWidget {
               itemCount: notes.length,
               itemBuilder: (context, index) {
                 final note = notes[index];
-                return ListTile(
-                  title: Text(note['title']),
-                  subtitle: Text("${note['description']} - \$${note['price']}"),
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NotesScreen(
-                        userId: userId, // Aquí también le pasas el userId
+                return Card(
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  elevation: 4,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                    title: Text(
+                      note['title'],
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey[800], // Color del título
+                      ),
+                    ),
+                    subtitle: Text(
+                      "${note['description']} - \$${note['price']}",
+                      style: TextStyle(
+                        color: Colors.blueGrey[600], // Color del subtítulo
+                      ),
+                    ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NotesScreen(
+                          userId: userId, // Aquí también le pasas el userId
+                        ),
                       ),
                     ),
                   ),

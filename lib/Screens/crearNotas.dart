@@ -1,11 +1,11 @@
-import 'package:app_autonomo/Navegacion/drawer.dart'; // Asegúrate de que MyDrawer esté importado correctamente
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:app_autonomo/Navegacion/drawer.dart';
 
 class CreateNoteScreen extends StatelessWidget {
-  final String userId;  // El userId necesario para el Drawer
+  final String userId;
 
-  CreateNoteScreen({required this.userId});  // Recibimos el userId en el constructor
+  CreateNoteScreen({required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +13,12 @@ class CreateNoteScreen extends StatelessWidget {
     final descriptionController = TextEditingController();
     final priceController = TextEditingController();
 
-    // Método para guardar la nota en Firebase
     Future<void> saveNote() async {
       final title = titleController.text;
       final description = descriptionController.text;
       final price = double.tryParse(priceController.text) ?? 0.0;
 
-      // Verifica que todos los campos estén completos
       if (title.isEmpty || description.isEmpty || price <= 0) {
-        // Muestra un mensaje de error si algún campo está vacío o el precio es 0
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Por favor, completa todos los campos')),
         );
@@ -30,19 +27,16 @@ class CreateNoteScreen extends StatelessWidget {
 
       try {
         DatabaseReference notesRef = FirebaseDatabase.instance.ref('users/$userId/notes');
-        final newNoteRef = notesRef.push();  // Crea una nueva referencia para la nota
+        final newNoteRef = notesRef.push();
 
-        // Guardamos los datos de la nueva nota en Firebase
         await newNoteRef.set({
           'title': title,
           'description': description,
           'price': price,
         });
 
-        // Una vez guardado, volvemos a la pantalla anterior
-        Navigator.pop(context);
+        Navigator.pop(context); // Volver a la pantalla anterior
       } catch (e) {
-        // Manejo de errores en caso de que ocurra algún problema con Firebase
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error al guardar la nota: $e')),
         );
@@ -51,7 +45,7 @@ class CreateNoteScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text("Nueva Nota")),
-      drawer: MyDrawer(userId: userId),  // Pasamos el userId al Drawer
+      drawer: MyDrawer(userId: userId),  // Aquí no cambiamos la navegación, solo el diseño
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -59,21 +53,51 @@ class CreateNoteScreen extends StatelessWidget {
           children: [
             TextField(
               controller: titleController,
-              decoration: InputDecoration(labelText: 'Título'),
+              decoration: InputDecoration(
+                labelText: 'Título',
+                labelStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: descriptionController,
-              decoration: InputDecoration(labelText: 'Descripción'),
+              decoration: InputDecoration(
+                labelText: 'Descripción',
+                labelStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: priceController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Precio'),
+              decoration: InputDecoration(
+                labelText: 'Precio',
+                labelStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: saveNote, // Llama a la función para guardar la nota
-              child: Text("Guardar Nota"),
+              onPressed: saveNote,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueGrey, // Color de fondo
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 14), // Padding vertical
+              ),
+              child: Text(
+                "Guardar Nota",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),

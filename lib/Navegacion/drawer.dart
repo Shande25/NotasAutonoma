@@ -11,50 +11,72 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,  
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text(
-              'Menú de Navegación',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
+      child: Container(
+        color: Colors.black, // Fondo negro para el Drawer
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.black, // Fondo negro para el header
+              ),
+              child: Text(
+                'Menú de Navegación',
+                style: TextStyle(
+                  color: Colors.white, // Texto en blanco
+                  fontSize: 18, // Título más pequeño
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          ListTile(
-            title: Text("CrearNota"),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateNoteScreen(userId: userId)), // Pasa el userId aquí
-              );
-            },
-          ),
-          ListTile(
-            title: Text("Lista de Notas"),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NotesListScreen(userId: userId)), // Pasa el userId aquí también
-              );
-            },
-          ),
-          ListTile(
-            title: Text("Detalle de Nota"),
-            onTap: () {
-              // Suponiendo que tienes un `noteId` para el detalle de la nota
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NotesScreen(  userId: userId)),
-              );
-            },
-          ),
-        ],
+            ListTile(
+              title: Text(
+                "Crear Nota",
+                style: TextStyle(
+                  color: Colors.white, // Texto blanco
+                  fontSize: 16, // Tamaño de texto ajustado
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreateNoteScreen(userId: userId)), // Pasa el userId aquí
+                );
+              },
+            ),
+            ListTile(
+              title: Text(
+                "Lista de Notas",
+                style: TextStyle(
+                  color: Colors.white, // Texto blanco
+                  fontSize: 16, // Tamaño de texto ajustado
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotesListScreen(userId: userId)), // Pasa el userId aquí también
+                );
+              },
+            ),
+            ListTile(
+              title: Text(
+                "Detalle de Nota",
+                style: TextStyle(
+                  color: Colors.white, // Texto blanco
+                  fontSize: 16, // Tamaño de texto ajustado
+                ),
+              ),
+              onTap: () {
+                // Suponiendo que tienes un `noteId` para el detalle de la nota
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotesScreen(userId: userId)),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

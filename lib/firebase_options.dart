@@ -76,4 +76,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'app-pokemon-73fee.appspot.com',
     measurementId: 'G-907B71Y0MS',
   );
+
 }

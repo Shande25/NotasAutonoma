@@ -1,7 +1,7 @@
 import 'package:app_autonomo/Screens/registerScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:app_autonomo/Screens/crearNotas.dart';  // Asegúrate de que este es el archivo de la pantalla de notas
+import 'package:app_autonomo/Screens/crearNotas.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -10,42 +10,66 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        
-        title: Text("Iniciar Sesión", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.black,
+        title: Text(
+          "Iniciar Sesión",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(32.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+           
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: "Correo Electrónico",
-                prefixIcon: Icon(Icons.email, color: Colors.red),
+                labelStyle: TextStyle(color: Colors.black54),
+                prefixIcon: Icon(Icons.email, color: Colors.blueGrey),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: BorderSide(color: Colors.blueGrey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
+              keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(height: 20),
+           
             TextField(
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: "Contraseña",
-                prefixIcon: Icon(Icons.lock, color: Colors.red),
+                labelStyle: TextStyle(color: Colors.black54),
+                prefixIcon: Icon(Icons.lock, color: Colors.blueGrey),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: BorderSide(color: Colors.blueGrey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
               obscureText: true,
             ),
             SizedBox(height: 30),
+           
             ElevatedButton(
               onPressed: () async {
                 String email = _emailController.text.trim();
@@ -53,22 +77,18 @@ class LoginScreen extends StatelessWidget {
 
                 if (email.isNotEmpty && password.isNotEmpty) {
                   try {
-                    // Intentamos iniciar sesión
-                    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    UserCredential userCredential = await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
                       email: email,
                       password: password,
                     );
 
-                    // Obtener el userId después de iniciar sesión
                     String userId = userCredential.user?.uid ?? '';
-
-                    // Verifica si el userId está disponible
                     if (userId.isNotEmpty) {
-                      // Redirige a CreateNoteScreen pasando el userId
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreateNoteScreen(userId: userId),  // Aquí se pasa el userId
+                          builder: (context) => CreateNoteScreen(userId: userId),
                         ),
                       );
                     } else {
@@ -83,23 +103,36 @@ class LoginScreen extends StatelessWidget {
                   }
                 }
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: Text("Ingresar", style: TextStyle(color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                padding: EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text(
+                "Ingresar",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             SizedBox(height: 20),
+            
             TextButton(
               onPressed: () {
-                // Navega a la pantalla de registro
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RegisterScreen(),  // Asegúrate de que RegisterScreen está bien importada
+                    builder: (context) => RegisterScreen(),
                   ),
                 );
               },
               child: Text(
                 "¿No tienes cuenta? Regístrate",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
               ),
             ),
           ],

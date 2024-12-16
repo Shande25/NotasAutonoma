@@ -49,8 +49,11 @@ class _NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Mis Notas")),
-      drawer: MyDrawer(userId: widget.userId),  // Pasamos el userId al Drawer
+      appBar: AppBar(
+        title: Text("Mis Notas"),
+        backgroundColor: Colors.blueGrey, 
+      ),
+      drawer: MyDrawer(userId: widget.userId),  
       body: StreamBuilder(
         stream: notesRef.onValue,
         builder: (context, snapshot) {
@@ -71,21 +74,42 @@ class _NotesScreenState extends State<NotesScreen> {
           List<Widget> noteWidgets = [];
           
           notes.forEach((key, value) {
-            noteWidgets.add(ListTile(
-              title: Text(value['title']),
-              subtitle: Text('Precio: \$${value['price']}'),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () => editNote(key, value['title'], value['description'], value['price']),
+            noteWidgets.add(Card(
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(color: Colors.grey.shade300),
+              ),
+              elevation: 4,
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                title: Text(
+                  value['title'],
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey[800], // Color del título
                   ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () => deleteNote(key),
+                ),
+                subtitle: Text(
+                  'Precio: \$${value['price']}',
+                  style: TextStyle(
+                    color: Colors.blueGrey[600], // Color del subtítulo
                   ),
-                ],
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () => editNote(key, value['title'], value['description'], value['price']),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () => deleteNote(key),
+                    ),
+                  ],
+                ),
               ),
             ));
           });
@@ -144,7 +168,10 @@ class EditNoteScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Editar Nota")),
+      appBar: AppBar(
+        title: Text("Editar Nota"),
+        backgroundColor: Colors.blueGrey, // Color del AppBar
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -152,21 +179,45 @@ class EditNoteScreen extends StatelessWidget {
           children: [
             TextField(
               controller: titleController,
-              decoration: InputDecoration(labelText: 'Título'),
+              decoration: InputDecoration(
+                labelText: 'Título',
+                labelStyle: TextStyle(color: Colors.blueGrey), // Color del label
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blueGrey), // Color del borde cuando está enfocado
+                ),
+              ),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: descriptionController,
-              decoration: InputDecoration(labelText: 'Descripción'),
+              decoration: InputDecoration(
+                labelText: 'Descripción',
+                labelStyle: TextStyle(color: Colors.blueGrey), // Color del label
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blueGrey), // Color del borde cuando está enfocado
+                ),
+              ),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: priceController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Precio'),
+              decoration: InputDecoration(
+                labelText: 'Precio',
+                labelStyle: TextStyle(color: Colors.blueGrey), // Color del label
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blueGrey), // Color del borde cuando está enfocado
+                ),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: updateNote,  // Llama a la función para actualizar la nota
-              child: Text("Actualizar Nota"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blueGrey), // Color del fondo del botón
+                padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 16)), // Padding personalizado
+              ),
+              child: Text("Actualizar Nota", style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
