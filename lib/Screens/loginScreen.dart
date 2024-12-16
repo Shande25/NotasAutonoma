@@ -88,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreateNoteScreen(userId: userId),
+                          builder: (context) => CrearNotas(userId: userId),
                         ),
                       );
                     } else {

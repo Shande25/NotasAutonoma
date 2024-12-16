@@ -4,27 +4,27 @@ import 'package:app_autonomo/Screens/notasScreen.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
-  final String userId; // Asegúrate de tener un userId en esta clase
+  final String userId; 
 
-  const MyDrawer({super.key, required this.userId}); // Asegúrate de pasar el userId cuando crees el MyDrawer
+  const MyDrawer({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Colors.black, // Fondo negro para el Drawer
+        color: Colors.black, 
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.black, // Fondo negro para el header
+                color: Colors.black, 
               ),
               child: Text(
                 'Menú de Navegación',
                 style: TextStyle(
-                  color: Colors.white, // Texto en blanco
-                  fontSize: 18, // Título más pequeño
+                  color: Colors.white, 
+                  fontSize: 18, 
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -33,14 +33,14 @@ class MyDrawer extends StatelessWidget {
               title: Text(
                 "Crear Nota",
                 style: TextStyle(
-                  color: Colors.white, // Texto blanco
-                  fontSize: 16, // Tamaño de texto ajustado
+                  color: Colors.white, 
+                  fontSize: 16, 
                 ),
               ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CreateNoteScreen(userId: userId)), // Pasa el userId aquí
+                  MaterialPageRoute(builder: (context) => CrearNotas(userId: userId)), 
                 );
               },
             ),
@@ -48,14 +48,14 @@ class MyDrawer extends StatelessWidget {
               title: Text(
                 "Lista de Notas",
                 style: TextStyle(
-                  color: Colors.white, // Texto blanco
-                  fontSize: 16, // Tamaño de texto ajustado
+                  color: Colors.white, 
+                  fontSize: 16, 
                 ),
               ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NotesListScreen(userId: userId)), // Pasa el userId aquí también
+                  MaterialPageRoute(builder: (context) => ListaNotas(userId: userId)), 
                 );
               },
             ),
@@ -63,15 +63,15 @@ class MyDrawer extends StatelessWidget {
               title: Text(
                 "Detalle de Nota",
                 style: TextStyle(
-                  color: Colors.white, // Texto blanco
-                  fontSize: 16, // Tamaño de texto ajustado
+                  color: Colors.white, 
+                  fontSize: 16, 
                 ),
               ),
               onTap: () {
-                // Suponiendo que tienes un `noteId` para el detalle de la nota
+                
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NotesScreen(userId: userId)),
+                  MaterialPageRoute(builder: (context) => EditarScreen(userId: userId)),
                 );
               },
             ),

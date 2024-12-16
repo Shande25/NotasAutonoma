@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:app_autonomo/Navegacion/drawer.dart';
 
-class CreateNoteScreen extends StatelessWidget {
+class CrearNotas extends StatelessWidget {
   final String userId;
 
-  CreateNoteScreen({required this.userId});
+  CrearNotas({required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class CreateNoteScreen extends StatelessWidget {
           'price': price,
         });
 
-        Navigator.pop(context); // Volver a la pantalla anterior
+        Navigator.pop(context); 
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error al guardar la nota: $e')),
@@ -45,7 +45,7 @@ class CreateNoteScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text("Nueva Nota")),
-      drawer: MyDrawer(userId: userId),  // Aquí no cambiamos la navegación, solo el diseño
+      drawer: MyDrawer(userId: userId),  
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -88,11 +88,11 @@ class CreateNoteScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: saveNote,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey, // Color de fondo
+                backgroundColor: Colors.blueGrey,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 14), // Padding vertical
+                padding: EdgeInsets.symmetric(vertical: 14), 
               ),
               child: Text(
                 "Guardar Nota",

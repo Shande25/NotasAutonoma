@@ -3,12 +3,11 @@ import 'package:app_autonomo/Screens/notasDetalles.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class NotesListScreen extends StatelessWidget {
-  final String userId; // Este sería el userId del usuario autenticado
+class ListaNotas extends StatelessWidget {
+  final String userId; 
 
-  NotesListScreen({required this.userId});
+  ListaNotas({required this.userId});
 
-  // Función para leer las notas del usuario
   Future<List<Map<String, dynamic>>> fetchNotes() async {
     DatabaseReference notesRef = FirebaseDatabase.instance.ref('users/$userId/notes');
     final snapshot = await notesRef.get();
@@ -33,10 +32,10 @@ class NotesListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(userId: userId), // Aquí le pasas el userId
+      drawer: MyDrawer(userId: userId), 
       appBar: AppBar(
         title: Text("Notas de Gastos"),
-        backgroundColor: Colors.blueGrey, // Cambié el color de fondo del AppBar
+        backgroundColor: Colors.blueGrey, 
       ),
       body: FutureBuilder(
         future: fetchNotes(),
@@ -63,20 +62,20 @@ class NotesListScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blueGrey[800], // Color del título
+                        color: Colors.blueGrey[800], 
                       ),
                     ),
                     subtitle: Text(
                       "${note['description']} - \$${note['price']}",
                       style: TextStyle(
-                        color: Colors.blueGrey[600], // Color del subtítulo
+                        color: Colors.blueGrey[600], 
                       ),
                     ),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NotesScreen(
-                          userId: userId, // Aquí también le pasas el userId
+                        builder: (context) => EditarScreen(
+                          userId: userId, 
                         ),
                       ),
                     ),

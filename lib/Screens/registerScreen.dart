@@ -50,7 +50,6 @@ class RegisterScreen extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: 20),
-              // Campo para la contraseña
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -117,7 +116,6 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              // Botón para regresar al login
               TextButton(
                 onPressed: () {
                   Navigator.push(

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:app_autonomo/Navegacion/drawer.dart';
 
-class NotesScreen extends StatefulWidget {
-  final String userId;  // Recibimos el userId para el Drawer y la referencia en Firebase
+class EditarScreen extends StatefulWidget {
+  final String userId;  
 
-  NotesScreen({required this.userId});
+  EditarScreen({required this.userId});
 
   @override
   _NotesScreenState createState() => _NotesScreenState();
 }
 
-class _NotesScreenState extends State<NotesScreen> {
+class _NotesScreenState extends State<EditarScreen> {
   late DatabaseReference notesRef;
 
   @override
@@ -88,13 +88,13 @@ class _NotesScreenState extends State<NotesScreen> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blueGrey[800], // Color del título
+                    color: Colors.blueGrey[800], 
                   ),
                 ),
                 subtitle: Text(
                   'Precio: \$${value['price']}',
                   style: TextStyle(
-                    color: Colors.blueGrey[600], // Color del subtítulo
+                    color: Colors.blueGrey[600], 
                   ),
                 ),
                 trailing: Row(
@@ -161,7 +161,7 @@ class EditNoteScreen extends StatelessWidget {
           'price': price,
         });
 
-        Navigator.pop(context);  // Volver a la pantalla anterior después de actualizar
+        Navigator.pop(context);  
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al actualizar la nota: $e')));
       }
@@ -170,7 +170,7 @@ class EditNoteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Editar Nota"),
-        backgroundColor: Colors.blueGrey, // Color del AppBar
+        backgroundColor: Colors.blueGrey, 
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -181,9 +181,9 @@ class EditNoteScreen extends StatelessWidget {
               controller: titleController,
               decoration: InputDecoration(
                 labelText: 'Título',
-                labelStyle: TextStyle(color: Colors.blueGrey), // Color del label
+                labelStyle: TextStyle(color: Colors.blueGrey), 
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueGrey), // Color del borde cuando está enfocado
+                  borderSide: BorderSide(color: Colors.blueGrey), 
                 ),
               ),
             ),
@@ -192,9 +192,9 @@ class EditNoteScreen extends StatelessWidget {
               controller: descriptionController,
               decoration: InputDecoration(
                 labelText: 'Descripción',
-                labelStyle: TextStyle(color: Colors.blueGrey), // Color del label
+                labelStyle: TextStyle(color: Colors.blueGrey), 
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueGrey), // Color del borde cuando está enfocado
+                  borderSide: BorderSide(color: Colors.blueGrey), 
                 ),
               ),
             ),
@@ -204,18 +204,18 @@ class EditNoteScreen extends StatelessWidget {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Precio',
-                labelStyle: TextStyle(color: Colors.blueGrey), // Color del label
+                labelStyle: TextStyle(color: Colors.blueGrey), 
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueGrey), // Color del borde cuando está enfocado
+                  borderSide: BorderSide(color: Colors.blueGrey), 
                 ),
               ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: updateNote,  // Llama a la función para actualizar la nota
+              onPressed: updateNote, 
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blueGrey), // Color del fondo del botón
-                padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 16)), // Padding personalizado
+                backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 16)), 
               ),
               child: Text("Actualizar Nota", style: TextStyle(fontSize: 16)),
             ),
