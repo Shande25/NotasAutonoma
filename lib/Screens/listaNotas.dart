@@ -1,5 +1,5 @@
 import 'package:app_autonomo/Navegacion/drawer.dart';
-import 'package:app_autonomo/Screens/notasDetalles.dart';
+import 'package:app_autonomo/Screens/editarNotas.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 

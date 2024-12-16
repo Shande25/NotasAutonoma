@@ -1,6 +1,6 @@
 import 'package:app_autonomo/Screens/crearNotas.dart';
-import 'package:app_autonomo/Screens/notasDetalles.dart';
-import 'package:app_autonomo/Screens/notasScreen.dart';
+import 'package:app_autonomo/Screens/editarNotas.dart';
+import 'package:app_autonomo/Screens/listaNotas.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
