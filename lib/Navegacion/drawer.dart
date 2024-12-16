@@ -21,7 +21,7 @@ class MyDrawer extends StatelessWidget {
                 color: Colors.black, 
               ),
               child: Text(
-                'Menú de Navegación',
+                'Navegacion de Notas',
                 style: TextStyle(
                   color: Colors.white, 
                   fontSize: 18, 
@@ -61,7 +61,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               title: Text(
-                "Detalle de Nota",
+                "Editar Notas",
                 style: TextStyle(
                   color: Colors.white, 
                   fontSize: 16, 

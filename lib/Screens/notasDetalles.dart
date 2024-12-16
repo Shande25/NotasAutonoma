@@ -69,7 +69,7 @@ class _NotesScreenState extends State<EditarScreen> {
             return Center(child: Text('No tienes notas guardadas.'));
           }
 
-          // Obtener las notas
+      
           Map<dynamic, dynamic> notes = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
           List<Widget> noteWidgets = [];
           
